@@ -10297,7 +10297,7 @@ var hiprint = function (t) {
         var r;
         if (tabs.length) {
           r = $('<div class="prop-tabs"><ul class="prop-tab-items"></ul></div>');
-          tabs.filter((e) => e.list.length > 0).forEach(function (tab) {
+          tabs.filter((e) => e.name === i18n.__('列') || e.list.length > 0).forEach(function (tab) {
             var item = $('<li class="prop-tab-item"><span class="tab-title">' + i18n.__(tab.name) + '</span></li>')
             r.find('.prop-tab-items').append(item)
             var options = $('<div class="hiprint-option-items" data-title="' + i18n.__(tab.name) + '"></div>')
