@@ -5712,11 +5712,15 @@ var hiprint = function (t) {
           } else {
             (h.target && (a = t.paperHeader, h.target.css("top", t.paperHeader + "pt")), f = t.paperHeader + h.height)
           }
+          let ttttop = this.options.getTop();
+          if(h.isOverflow){
+            ttttop+=h.height
+          }
           n.push(new _dto_PaperHtmlResult__WEBPACK_IMPORTED_MODULE_2__.a({
             target: h.target,
             printLine: f,
             referenceElement: new _PrintReferenceElement__WEBPACK_IMPORTED_MODULE_4__.a({
-              top: this.options.getTop(),
+              top: ttttop,
               left: this.options.getLeft(),
               height: this.options.getHeight(),
               width: this.options.getWidth(),
@@ -5838,10 +5842,12 @@ var hiprint = function (t) {
           let height = d.find("tbody tr").outerHeight();
           a.prepend(curRow);
           return {
-            target: $(`<div style="position:absolute;background: red;color: white;padding: 0px 4px;">${i18n.__('没有足够空间,显示下方内容, 可分页高度')}: `+ p +`px < ${i18n.__('当前需要高度')}: `+ height +'px</div>').append(curRow.css("background", "blue")),
+            // target: $(`<div style="position:absolute;background: red;color: white;padding: 0px 4px;">${i18n.__('没有足够空间,显示下方内容, 可分页高度')}: `+ p +`px < ${i18n.__('当前需要高度')}: `+ height +'px</div>').append(curRow.css("background", "blue")),
+            target: void 0,
             length: m,
             height: _assets_plugins_hinnn__WEBPACK_IMPORTED_MODULE_3__.a.px.toPt(s),
-            isEnd: !1
+            isEnd: !1,
+            isOverflow: true
           }
         }
         // 方便调试看 值...
