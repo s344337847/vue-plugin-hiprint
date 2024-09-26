@@ -5714,7 +5714,7 @@ var hiprint = function (t) {
           }
           let ttttop = this.options.getTop();
           if(h.isOverflow){
-            ttttop+=h.height
+            ttttop += h.height
           }
           n.push(new _dto_PaperHtmlResult__WEBPACK_IMPORTED_MODULE_2__.a({
             target: h.target,
@@ -5840,10 +5840,8 @@ var hiprint = function (t) {
         if (m == 0 && curRow.length && g == curRow.data("rowData")) {
           d.find("tbody").append(curRow);
           let height = d.find("tbody tr").outerHeight();
-          a.prepend(curRow);
           return {
-            // target: $(`<div style="position:absolute;background: red;color: white;padding: 0px 4px;">${i18n.__('没有足够空间,显示下方内容, 可分页高度')}: `+ p +`px < ${i18n.__('当前需要高度')}: `+ height +'px</div>').append(curRow.css("background", "blue")),
-            target: void 0,
+            target: n.clone(),
             length: m,
             height: _assets_plugins_hinnn__WEBPACK_IMPORTED_MODULE_3__.a.px.toPt(s),
             isEnd: !1,
