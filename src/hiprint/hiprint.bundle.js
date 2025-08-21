@@ -5713,7 +5713,7 @@ var hiprint = function (t) {
             (h.target && (a = t.paperHeader, h.target.css("top", t.paperHeader + "pt")), f = t.paperHeader + h.height)
           }
           let ttttop = this.options.getTop();
-          if(h.isOverflow){
+          if (h.isOverflow) {
             ttttop += h.height
           }
           n.push(new _dto_PaperHtmlResult__WEBPACK_IMPORTED_MODULE_2__.a({
@@ -5728,7 +5728,13 @@ var hiprint = function (t) {
               bottomInLastPaper: f,
               printTopInPaper: a
             })
-          })), s++;
+          }));
+          if (h.isFristRowAndOverflow) {
+            i = this.getData(e)
+            o = this.getTableHtml(i, e)
+          }
+          s++;
+
           e && this.updatePanelHeight(f + this.options.getHeight(), t);
         }
 
@@ -5737,7 +5743,6 @@ var hiprint = function (t) {
         var that = this;
         var a = i.find("tbody"),
           p = _assets_plugins_hinnn__WEBPACK_IMPORTED_MODULE_3__.a.pt.toPx(e);
-
         n.find(".hiprint-printElement-tableTarget tbody").html("");
         // 不是最后显示页脚
         if ("last" != this.options.tableFooterRepeat) {
@@ -5839,15 +5844,31 @@ var hiprint = function (t) {
         let curRow = a.find("tr:lt(1)");
         if (m == 0 && curRow.length && g == curRow.data("rowData")) {
           d.find("tbody").append(curRow);
-          let height = d.find("tbody tr").outerHeight();
+          let trHeight = d.find("tbody tr").outerHeight();
+          if((trHeight + s) > p){
+            // 超过纸张，当前表格一到下一页
+            return {
+              target: void 0,
+              length: 1,
+              height: 0,
+              isEnd: !1,
+              isFristRowAndOverflow: true
+            };
+          }
+          let height = d.outerHeight();
           return {
             target: n.clone(),
             length: m,
             height: _assets_plugins_hinnn__WEBPACK_IMPORTED_MODULE_3__.a.px.toPt(s),
+            tableHeight: _assets_plugins_hinnn__WEBPACK_IMPORTED_MODULE_3__.a.px.toPt(height),
             isEnd: !1,
             isOverflow: true
           }
         }
+        // 补全class
+        //  d.find("tbody").addClass("hiprint-printElement-tableTarget-border-all");
+        // d.find("tbody").addClass("hiprint-printElement-tableTarget-border-td-all");
+
         // 方便调试看 值...
         var zz = 0 == a.find("tr").length ? 0 == m && r ? {
           target: void 0,
